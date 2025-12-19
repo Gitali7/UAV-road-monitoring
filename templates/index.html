@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Damage AI</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f3f4f6;
+            --surface: #ffffff;
+            --text-main: #111827;
+            --text-sub: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: -webkit-linear-gradient(45deg, #4f46e5, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: var(--text-sub);
+            margin-bottom: 2rem;
+        }
+
+        /* Modern Upload Area */
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            background-color: #fafafa;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: #eef2ff;
+        }
+
+        .upload-icon {
+            width: 64px;
+            height: 64px;
+            color: var(--primary);
+        }
+
+        .upload-text {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .upload-subtext {
+            font-size: 0.875rem;
+            color: var(--text-sub);
+        }
+
+        /* Hidden Input */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Submit Button */
+        .btn {
+            margin-top: 2rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Success State */
+        .file-selected {
+            border-color: #10b981;
+            background-color: #ecfdf5;
+        }
+
+        .file-name {
+            color: #059669;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>AI Road Inspector</h1>
+        <p>Smart Road Damage Detection System</p>
+
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <label for="file-upload" class="upload-area" id="drop-area">
+                <!-- SVG Cloud Upload Icon -->
+                <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                    </path>
+                </svg>
+                <div id="file-label" class="upload-text">Select Image to Analyze</div>
+                <div class="upload-subtext">Supports JPG, PNG, WEBP</div>
+            </label>
+            <input id="file-upload" type="file" name="file" accept="image/*" onchange="updateLabel(this)">
+
+            <button type="submit" class="btn">Start Analysis</button>
+        </form>
+    </div>
+
+    <script>
+        function updateLabel(input) {
+            const label = document.getElementById('file-label');
+            const area = document.getElementById('drop-area');
+            const icon = document.querySelector('.upload-icon');
+
+            if (input.files && input.files[0]) {
+                label.innerHTML = `Selected: <span class="file-name">${input.files[0].name}</span>`;
+                area.classList.add('file-selected');
+
+                // Change icon to checkmark
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+            } else {
+                label.textContent = "Select Image to Analyze";
+                area.classList.remove('file-selected');
+            }
+        }
+    </script>
+</body>
+
+</html>

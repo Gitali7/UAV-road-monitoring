@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --danger: #ef4444;
+            --success: #22c55e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .status-banner {
+            width: 100%;
+            max-width: 1200px;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .status-red {
+            background-color: var(--danger);
+        }
+
+        .status-green {
+            background-color: var(--success);
+        }
+
+        .results-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .image-card {
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .image-card h3 {
+            margin-top: 0;
+            color: var(--text);
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        .actions {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Analysis Results</h1>
+    </div>
+
+    {% if status_text %}
+    <div class="status-banner status-{{ status_color }}">
+        {{ status_text }}
+    </div>
+    {% endif %}
+
+    <div class="results-container">
+        <div class="image-card">
+            <h3>Original Image</h3>
+            <img src="{{ original_image }}" alt="Original Upload">
+        </div>
+        <div class="image-card">
+            <h3>Grid Analysis</h3>
+            <img src="{{ result_image }}" alt="Analysis Result">
+        </div>
+    </div>
+    <div class="actions">
+        <a href="/" class="btn">Analyze Another Image</a>
+    </div>
+</body>
+
+</html>

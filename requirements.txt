@@ -1,0 +1,30 @@
+flask
+minisom
+ultralytics
+opencv-python
+albumentations
+torch
+torchvision
+numpy
+Pillow
+# Roboflow dependencies
+certifi
+idna
+cycler
+kiwisolver
+matplotlib
+python-dateutil
+python-dotenv
+requests
+six
+urllib3
+tqdm
+PyYAML
+requests-toolbelt
+filetype
+pi_heif
+# FastAPI dependencies
+fastapi
+uvicorn
+python-multipart
+jinja2
